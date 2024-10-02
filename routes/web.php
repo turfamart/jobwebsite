@@ -10,8 +10,7 @@ Route::get('/', function () {
  */
 Route::get('/',[HomeController::class,'index'])->name('home');
 
-Route::get('/account/profile',[AccountController::class,'profile'])->name('account.profile');
-Route::get('/account/logout',[AccountController::class,'logout'])->name('account.logout');
+
 
 Route::group(['account'] , function(){
 
@@ -22,4 +21,13 @@ Route::group(['account'] , function(){
         Route::post('/account/authenticate',[AccountController::class,'authenticate'])->name('account.authenticate');
     });
 });
+
+Route::group(['account'] , function(){
+
+    Route::group(['middleware' => 'auth'] , function(){
+        Route::get('/account/profile',[AccountController::class,'profile'])->name('account.profile');
+        Route::get('/account/logout',[AccountController::class,'logout'])->name('account.logout');
+    });
+});
+
 
