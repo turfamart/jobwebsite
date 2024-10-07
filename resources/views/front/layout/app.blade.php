@@ -49,7 +49,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="profilePicImg" name="profilePicImg" action="" method="post">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Profile Image</label>
                 <input type="file" class="form-control" id="image"  name="image">
@@ -82,6 +82,24 @@
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
+});
+
+$("#profilePicImg").submit(function(e){
+	e.preventDefault();
+
+	var formData = new formData(this);
+
+	$.ajax({
+		url:'',
+		type:'',
+		data:formData,
+		dataType:'json',
+		contentType:flase,
+		processData:false,
+		success:function(response){
+
+		}
+	});
 });
 </script>
 @yield('customJs')
