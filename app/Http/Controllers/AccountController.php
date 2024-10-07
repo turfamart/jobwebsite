@@ -88,7 +88,7 @@ class AccountController extends Controller
 
         $validator = Validator::make($request->all(),[
             'name' =>'required|min:5|max:20',
-            'email' =>'required|email|unique:users,email,'.$id.',id',
+            'email' =>'required|email|unique:users,email,'.$id.',id'
 
         ]);
 
@@ -100,7 +100,7 @@ class AccountController extends Controller
            $user->designation = $request->designation;
            $user->save();
 
-           Session()->flash('success','Profile Updated Successfully');
+           session()->flash('success','Profile Updated Successfully');
 
            return response()->json([
             'status' => 'true',
@@ -108,6 +108,9 @@ class AccountController extends Controller
            ]);
         }
         else {
+
+            session()->flash('error','Profile did not Updated Properly');
+
             return response()->json([
                 'status' => 'false',
                 'errors' => $validator->errors()
