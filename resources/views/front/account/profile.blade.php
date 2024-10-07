@@ -76,11 +76,17 @@ $("#userForm").submit(function(e){
     e.preventDefault();
 
     $.ajax({
-        url:'',
+        url:'{{ route("account.updateprofile") }}',
         type:'put',
         data:$("#userForm").serializeArray(),
         dataType:'json',
-        success: function (response)
+        success: function (response) {
+            if(response.status == true) {
+
+            } else {
+                var errors = response.errors;
+            }
+        }
     })
 });
 </script>
