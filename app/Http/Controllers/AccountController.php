@@ -123,4 +123,25 @@ class AccountController extends Controller
 
         return redirect()->route('account.login');
       }
+
+      public function updateProfilePic(Request $request) {
+
+        $id = Auth::user()->id;
+        
+       $validator = Validator::make($request->all(),[
+        'image' => 'required|image'
+       ]);
+
+       if($validator->passes()) {
+            
+        $image = $request->image;
+        $ext = $image->getClientOriginalExtension();
+        $imageName = $id.'-'.time().'.'.$ext;
+       } else {
+            return response()->json([
+                'status' => 'false',
+                'errors' => $validator->errors()
+            ]);
+       }
+      }
 }

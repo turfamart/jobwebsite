@@ -53,6 +53,7 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Profile Image</label>
                 <input type="file" class="form-control" id="image"  name="image">
+				<p class="text-danger" id="image-error"></p>
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary mx-3">Update</button>
@@ -87,17 +88,22 @@
 $("#profilePicImg").submit(function(e){
 	e.preventDefault();
 
-	var formData = new formData(this);
+	var formData = new FormData(this);
 
 	$.ajax({
-		url:'',
-		type:'',
+		url:'{{ route("account.updateProfilePic") }}',
+		type:'post',
 		data:formData,
 		dataType:'json',
-		contentType:flase,
+		contentType:false,
 		processData:false,
 		success:function(response){
-
+			if(response.status = false) {
+				var errors = response.errors;
+				if(error.image) {
+					$("#image-error").html(error.image)
+				}
+			}
 		}
 	});
 });
