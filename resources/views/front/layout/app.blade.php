@@ -100,8 +100,11 @@ $("#profilePicImg").submit(function(e){
 		success:function(response){
 			if(response.status = false) {
 				var errors = response.errors;
-				if(error.image) {
+				if(errors.image) {
 					$("#image-error").html(error.image)
+				}
+				else {
+					window.location.href = '{{ url()->current() }}'
 				}
 			}
 		}

@@ -82,7 +82,8 @@ $("#userForm").submit(function(e){
     e.preventDefault();
 
     $.ajax({
-        url:'{{ route("account.updateprofile") }}',
+      
+        url:'{{ route("accountupdateprofile") }}',
         type:'put',
         data:$("#userForm").serializeArray(),
         dataType:'json',

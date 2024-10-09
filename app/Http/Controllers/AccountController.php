@@ -137,6 +137,12 @@ class AccountController extends Controller
         $image = $request->image;
         $ext = $image->getClientOriginalExtension();
         $imageName = $id.'-'.time().'.'.$ext;
+        $image->move(public_path('/profile_pic/'), $imageName);
+
+        User::where('id', $id)->update(['image' => $imageName]);
+
+        session()->flash('success','Profile picture updated Successfully');
+
        } else {
             return response()->json([
                 'status' => 'false',
