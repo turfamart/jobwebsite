@@ -7,7 +7,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\GD\Driver;
 
 class AccountController extends Controller
 {
@@ -138,6 +141,17 @@ class AccountController extends Controller
         $ext = $image->getClientOriginalExtension();
         $imageName = $id.'-'.time().'.'.$ext;
         $image->move(public_path('/profile_pic/'), $imageName);
+
+        $sourceImage = public_path('/profile_pic/'.$imageName);
+        //Create a small thumbnail
+        $manager = new ImageManager(Driver::class);
+        $image = $manager->read($sourceImage); // 800 x 600
+
+        $image->cover(150, 150);
+        $image->toPng()->save(public_path('/profile_pic/thumb/'.$imageName));
+
+        File::delete(public_path('/profile_pic/'.Auth::user()->image));
+        File::delete(public_path('/profile_pic/thumb/'.Auth::user()->image));
 
         User::where('id', $id)->update(['image' => $imageName]);
 
