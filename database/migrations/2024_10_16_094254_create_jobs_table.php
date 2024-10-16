@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreign('category_id')->references('id')->on('catagories');
-           $table->foreign('job_type_id')->references('id')->on('job_types');
-           // $table->foreignId('category_id')->constrained()->onDelete('cascade');
-         //  $table->foreignId('job_type_id')->constrained()->onDelete('cascade');
+           // $table->foreign('category_id')->references('id')->on('categories');
+          // $table->foreign('job_type_id')->references('id')->on('jobtypes');
+         // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+         // $table->foreign('job_type_id')->references('id')->on('jobtypes')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+          $table->foreignId('job_type_id')->constrained()->onDelete('cascade');
             $table->string('vacancy');
             $table->string('salary')->nullable();
             $table->string('location');

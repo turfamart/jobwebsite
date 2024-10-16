@@ -21,7 +21,7 @@ Route::group(['account'] , function(){
         Route::post('/account/authenticate',[AccountController::class,'authenticate'])->name('account.authenticate');
     });
 });
-
+Route::get('/createJobs',[AccountController::class,'createJobs'])->name('account.createJobs');
 Route::group(['account'] , function(){
 
     Route::group(['middleware' => 'auth'] , function(){
@@ -29,6 +29,7 @@ Route::group(['account'] , function(){
         Route::put('/update-profile',[AccountController::class,'updateProfile'])->name('accountupdateprofile');
         Route::get('/account/logout',[AccountController::class,'logout'])->name('account.logout');
         Route::post('/update-profilePic',[AccountController::class,'updateProfilePic'])->name('account.updateProfilePic');
+     
     });
 });
 

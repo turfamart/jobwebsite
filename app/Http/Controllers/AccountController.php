@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -163,5 +164,12 @@ class AccountController extends Controller
                 'errors' => $validator->errors()
             ]);
        }
+      }
+
+      public function createJobs (){
+        $categories = Category::orderBy('name','ASC')->where('status',1)->get();
+        return view('front.account.job.create',[
+            'categories' => $categories
+        ]);
       }
 }
