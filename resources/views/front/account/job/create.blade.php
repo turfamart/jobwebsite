@@ -26,11 +26,12 @@
                             <div class="col-md-6 mb-4">
                                 <label for="" class="mb-2">Title<span class="req">*</span></label>
                                 <input type="text" placeholder="Job Title" id="title" name="title" class="form-control">
+                                <p></p>
                             </div>
                             <div class="col-md-6  mb-4">
                                 <label for="" class="mb-2">Category<span class="req">*</span></label>
                                 <select name="category" id="category" class="form-control">
-                                    <option value="">Select a Category</option>
+                                      <option value="">Select a Category</option>
                                     @if($categories->isNotEmpty())
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -39,22 +40,27 @@
                                    
                                   
                                 </select>
+                                <p></p>
                             </div>
                         </div>
                         
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <label for="" class="mb-2">Job Nature<span class="req">*</span></label>
-                                <select class="form-select">
-                                    <option>Full Time</option>
-                                    <option>Part Time</option>
-                                    <option>Remote</option>
-                                    <option>Freelance</option>
+                                <select name="job_type" id="job_type" class="form-select">
+                                    <option>SELECT</option>
+                                    @if($jobtypes->isNotEmpty())
+                                    @foreach($jobtypes as $jobtype)
+                                    <option value="{{ $jobtype->id }}">{{ $jobtype->name }}</option>
+                                    @endforeach
+                                @endif
                                 </select>
+                                <p></p>
                             </div>
                             <div class="col-md-6  mb-4">
                                 <label for="" class="mb-2">Vacancy<span class="req">*</span></label>
                                 <input type="number" min="1" placeholder="Vacancy" id="vacancy" name="vacancy" class="form-control">
+                                <p></p>
                             </div>
                         </div>
 
@@ -66,14 +72,17 @@
 
                             <div class="mb-4 col-md-6">
                                 <label for="" class="mb-2">Location<span class="req">*</span></label>
-                                <input type="text" placeholder="location" id="location" name="Location" class="form-control">
+                                <input type="text" placeholder="location" id="location" name="location" class="form-control">
+                                <p></p>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label for="" class="mb-2">Description<span class="req">*</span></label>
                             <textarea class="form-control" name="description" id="description" cols="5" rows="5" placeholder="Description"></textarea>
+                            <p></p>
                         </div>
+                      
                         <div class="mb-4">
                             <label for="" class="mb-2">Benefits</label>
                             <textarea class="form-control" name="benefits" id="benefits" cols="5" rows="5" placeholder="Benefits"></textarea>
@@ -100,11 +109,13 @@
                             <div class="mb-4 col-md-6">
                                 <label for="" class="mb-2">Name<span class="req">*</span></label>
                                 <input type="text" placeholder="Company Name" id="company_name" name="company_name" class="form-control">
+                                <p></p>
                             </div>
 
                             <div class="mb-4 col-md-6">
                                 <label for="" class="mb-2">Location</label>
-                                <input type="text" placeholder="Location" id="location" name="location" class="form-control">
+                                <input type="text" placeholder="location" id="location" name="location" class="form-control">
+                               <p></p>
                             </div>
                         </div>
 
@@ -114,7 +125,7 @@
                         </div>
                     </div> 
                     <div class="card-footer  p-4">
-                        <button type="button" class="btn btn-primary">Save Job</button>
+                        <button type="submit" class="btn btn-primary">Save Job</button>
                     </div>               
                  </div>
                 </form>
@@ -127,59 +138,120 @@
 
 @section('customJs')
 <script type="text/javascript">
-$("#userForm").submit(function(e){
+$("#createJob").submit(function(e){
     e.preventDefault();
 
     $.ajax({
       
-        url:'{{ route("accountupdateprofile") }}',
-        type:'put',
-        data:$("#userForm").serializeArray(),
+        url:'{{ route("account.saveJobs") }}',
+        type:'post',
+        data:$("#createJob").serializeArray(),
         dataType:'json',
         success: function (response) {
             if(response.status == true) {
 
-                $("#name").removeClass('is-invalid')
-                    .siblings('p')
-                    .removeClass('invalid-feedback')
-                    .html('')
+                // $("#name").removeClass('is-invalid')
+                //     .siblings('p')
+                //     .removeClass('invalid-feedback')
+                //     .html('')
 
-                    $("#email").removeClass('is-invalid')
-                    .siblings('p')
-                    .removeClass(invalid-feedback)
-                    .html('')
+                //     $("#email").removeClass('is-invalid')
+                //     .siblings('p')
+                //     .removeClass(invalid-feedback)
+                //     .html('')
 
                     window.location.href="{{ route('account.profile') }}";
 
             } else {
                 var errors = response.errors;
 
-                if(errors.name){
-                    $("#name").addClass('is-invalid')
+                if(errors.title){
+                    $("#title").addClass('is-invalid')
                     .siblings('p')
                     .addClass('invalid-feedback')
-                    .html(errors.name)
+                    .html(errors.title)
 
                 }
                 else{
-                    $("#name").removeClass('is-invalid')
+                    $("#title").removeClass('is-invalid')
                     .siblings('p')
                     .removeClass('invalid-feedback')
                     .html('')
                 }
-                if(errors.email){
-                    $("#email").addClass('is-valid')
+                
+                if(errors.job_type){
+                    $("#job_type").addClass('is-invalid')
                     .siblings('p')
                     .addClass('invalid-feedback')
-                    .html(errors.email)
+                    .html(errors.job_type)
 
                 }
                 else{
-                    $("#email").removeClass('is-invalid')
+                    $("#job_type").removeClass('is-invalid')
                     .siblings('p')
-                    .removeClass(invalid-feedback)
+                    .removeClass('invalid-feedback')
                     .html('')
                 }
+                if(errors.description){
+                    $("#description").addClass('is-invalid')
+                    .siblings('p')
+                    .addClass('invalid-feedback')
+                    .html(errors.description)
+
+                }
+                else{
+                    $("#description").removeClass('is-invalid')
+                    .siblings('p')
+                    .removeClass('invalid-feedback')
+                    .html('')
+                }
+                
+                if(errors.category){
+                    $("#category").addClass('is-invalid')
+                    .siblings('p')
+                    .addClass('invalid-feedback')
+                    .html(errors.category)
+
+                }
+                else{
+                    $("#category").removeClass('is-invalid')
+                    .siblings('p')
+                    .removeClass('invalid-feedback')
+                    .html('')
+                }
+              
+              
+              
+                if(errors.location){
+                    $("#location").addClass('is-invalid')
+                    .siblings('p')
+                    .addClass('invalid-feedback')
+                    .html(errors.location)
+
+                }
+                else{
+                    $("#location").removeClass('is-invalid')
+                    .siblings('p')
+                    .removeClass('invalid-feedback')
+                    .html('')
+                }
+                if(errors.company_name){
+                    $("#company_name").addClass('is-invalid')
+                    .siblings('p')
+                    .addClass('invalid-feedback')
+                    .html(errors.company_name)
+
+                }
+                else{
+                    $("#company_name").removeClass('is-invalid')
+                    .siblings('p')
+                    .removeClass('invalid-feedback')
+                    .html('')
+                }
+               
+               
+                
+
             }
         }
     })
