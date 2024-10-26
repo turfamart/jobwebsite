@@ -160,7 +160,7 @@ $("#createJob").submit(function(e){
                 //     .removeClass(invalid-feedback)
                 //     .html('')
 
-                    window.location.href="{{ route('account.profile') }}";
+                    window.location.href="{{ route('account.myJobs') }}";
 
             } else {
                 var errors = response.errors;

@@ -31,6 +31,7 @@ Route::group(['account'] , function(){
             Route::post('/update-profilePic',[AccountController::class,'updateProfilePic'])->name('account.updateProfilePic');
             Route::post('/saveJobs',[AccountController::class,'saveJobs'])->name('account.saveJobs');
             Route::get('/createJobs',[AccountController::class,'createJobs'])->name('account.createJobs');
+            Route::get('/my-jobs ',[AccountController::class,'myJobs'])->name('account.myJobs');
      
     });
 });
