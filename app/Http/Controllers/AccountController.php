@@ -251,7 +251,8 @@ class AccountController extends Controller
 
         return view('front.account.job.edit',[
             'categories' => $categories,
-            'jobtypes' => $jobtypes
+            'jobtypes' => $jobtypes,
+            'job' => $job
         ]);
       }
 }

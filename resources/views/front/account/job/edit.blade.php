@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <label for="" class="mb-2">Title<span class="req">*</span></label>
-                                <input type="text" placeholder="Job Title" id="title" name="title" class="form-control">
+                                <input type="text" value="{{ $job->title }}" placeholder="Job Title" id="title" name="title" class="form-control">
                                 <p></p>
                             </div>
                             <div class="col-md-6  mb-4">
@@ -34,7 +34,7 @@
                                       <option value="">Select a Category</option>
                                     @if($categories->isNotEmpty())
                                         @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option {{ ($job->category_id == $category->id ) ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     @endif
                                    
@@ -51,7 +51,7 @@
                                     <option>SELECT</option>
                                     @if($jobtypes->isNotEmpty())
                                     @foreach($jobtypes as $jobtype)
-                                    <option value="{{ $jobtype->id }}">{{ $jobtype->name }}</option>
+                                    <option {{ ($job->job_type_id == $jobtype->id ) ? 'selected' : ''}} value="{{ $jobtype->id }}">{{ $jobtype->name }}</option>
                                     @endforeach
                                 @endif
                                 </select>
@@ -67,40 +67,40 @@
                         <div class="row">
                             <div class="mb-4 col-md-6">
                                 <label for="" class="mb-2">Salary</label>
-                                <input type="text" placeholder="Salary" id="salary" name="salary" class="form-control">
+                                <input type="text" value="{{ $job->vacancy }}" placeholder="Salary" id="salary" name="salary" class="form-control">
                             </div>
 
                             <div class="mb-4 col-md-6">
                                 <label for="" class="mb-2">Location<span class="req">*</span></label>
-                                <input type="text" placeholder="location" id="location" name="location" class="form-control">
+                                <input type="text" value="{{ $job->location }}" placeholder="location" id="location" name="location" class="form-control">
                                 <p></p>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label for="" class="mb-2">Description<span class="req">*</span></label>
-                            <textarea class="form-control" name="description" id="description" cols="5" rows="5" placeholder="Description"></textarea>
+                            <textarea class="form-control" name="description" id="description" cols="5" rows="5" placeholder="Description">{{ $job->description }}</textarea>
                             <p></p>
                         </div>
                       
                         <div class="mb-4">
                             <label for="" class="mb-2">Benefits</label>
-                            <textarea class="form-control" name="benefits" id="benefits" cols="5" rows="5" placeholder="Benefits"></textarea>
+                            <textarea class="form-control" name="benefits" id="benefits" cols="5" rows="5" placeholder="Benefits">{{ $job->benifits }}</textarea>
                         </div>
                         <div class="mb-4">
                             <label for="" class="mb-2">Responsibility</label>
-                            <textarea class="form-control" name="responsibility" id="responsibility" cols="5" rows="5" placeholder="Responsibility"></textarea>
+                            <textarea class="form-control" name="responsibility" id="responsibility" cols="5" rows="5" placeholder="Responsibility">{{ $job->responsibility }}</textarea>
                         </div>
                         <div class="mb-4">
                             <label for="" class="mb-2">Qualifications</label>
-                            <textarea class="form-control" name="qualifications" id="qualifications" cols="5" rows="5" placeholder="Qualifications"></textarea>
+                            <textarea class="form-control" name="qualifications" id="qualifications" cols="5" rows="5" placeholder="Qualifications">{{ $job->qualification }}</textarea>
                         </div>
                         
                         
 
                         <div class="mb-4">
                             <label for="" class="mb-2">Keywords<span class="req">*</span></label>
-                            <input type="text" placeholder="keywords" id="keywords" name="keywords" class="form-control">
+                            <input value="{{ $job->keywords }}" type="text" placeholder="keywords" id="keywords" name="keywords" class="form-control">
                         </div>
 
                         <h3 class="fs-4 mb-1 mt-5 border-top pt-5">Company Details</h3>
@@ -108,20 +108,20 @@
                         <div class="row">
                             <div class="mb-4 col-md-6">
                                 <label for="" class="mb-2">Name<span class="req">*</span></label>
-                                <input type="text" placeholder="Company Name" id="company_name" name="company_name" class="form-control">
+                                <input type="text" value="{{ $job->company_name }}" placeholder="Company Name" id="company_name" name="company_name" class="form-control">
                                 <p></p>
                             </div>
 
                             <div class="mb-4 col-md-6">
                                 <label for="" class="mb-2">Location</label>
-                                <input type="text" placeholder="location" id="location" name="location" class="form-control">
+                                <input type="text" value="{{ $job->location }}" placeholder="location" id="location" name="location" class="form-control">
                                <p></p>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label for="" class="mb-2">Website</label>
-                            <input type="text" placeholder="Website" id="website" name="website" class="form-control">
+                            <input type="text" value="{{ $job->website }}" placeholder="Website" id="website" name="website" class="form-control">
                         </div>
                     </div> 
                     <div class="card-footer  p-4">
