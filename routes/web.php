@@ -33,6 +33,8 @@ Route::group(['account'] , function(){
             Route::get('/createJobs',[AccountController::class,'createJobs'])->name('account.createJobs');
             Route::get('/my-jobs',[AccountController::class,'myJobs'])->name('account.myJobs');
             Route::get('/my-jobs/edit/{jobId}',[AccountController::class,'editJob'])->name('account.editJob');
+            Route::put('/update-job/{jobId}',[AccountController::class,'updateJob'])->name('account.updateJob');
+            Route::put('/deleteJobs',[AccountController::class,'deleteJobs'])->name('account.deleteJobs');
      
     });
 });

@@ -18,7 +18,7 @@
             </div>
             <div class="col-lg-9">
                 @include('front.message')
-                <form method="POST" action="" name="createJob" id="createJob">
+                <form method="POST" action="" name="updateJob" id="updateJob">
                 <div class="card border-0 shadow mb-4 ">
                     <div class="card-body card-form p-4">
                         <h3 class="fs-4 mb-1">Job Details</h3>
@@ -138,14 +138,14 @@
 
 @section('customJs')
 <script type="text/javascript">
-$("#createJob").submit(function(e){
+$("#updateJob").submit(function(e){
     e.preventDefault();
 
     $.ajax({
       
-        url:'{{ route("account.saveJobs") }}',
-        type:'post',
-        data:$("#createJob").serializeArray(),
+        url:'{{ route("account.updateJob", $job->id) }}',
+        type:'put',
+        data:$("#updateJob").serializeArray(),
         dataType:'json',
         success: function (response) {
             if(response.status == true) {
